@@ -1,7 +1,11 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import connectMongoDB from "@/configs/mongodb";
+import connectMongoDB from "@/configs/mongodb.config";
 import { MongoClient } from "mongodb";
+import OpenAIService from "@/services/openai.services";
+import pc from "@/configs/pinecone.config";
+
+const index = pc.Index("movie-scripts");
 
 const scrapeScript = async () => {
   try {
@@ -10,13 +14,13 @@ const scrapeScript = async () => {
     await client.connect();
 
     const db = client.db("movieDB");
-    const movieTitle = "TheBrutalist";
+    const movieTitle = "The social network";
     const collectionName = `movie_${movieTitle
       .replace(/\s+/g, "_")
       .toLowerCase()}`;
     const movieCollection = db.collection(collectionName);
 
-    const url = "https://imsdb.com/scripts/Brutalist,-The.html";
+    const url = "https://imsdb.com/scripts/Social-Network,-The.html";
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
     const scriptText = $("pre").text();
@@ -34,10 +38,24 @@ const scrapeScript = async () => {
       const character = match[1].trim();
       const dialogue = match[2].replace(/\s+/g, " ").trim(); // Removes extra spaces & newlines
 
+      const response = await OpenAIService.getEmbedding(dialogue);
+
+      const embedding = response.data[0].embedding;
+
+      console.log("...");
+
       await movieCollection.insertOne({
         character,
         dialogue,
       });
+
+      await index.upsert([
+        {
+          id: `${movieTitle}-${character}-${Math.random()}`,
+          values: embedding,
+          metadata: { character, dialogue, movieTitle },
+        },
+      ]);
     }
 
     console.log(`Script stored in collection: ${collectionName}`);

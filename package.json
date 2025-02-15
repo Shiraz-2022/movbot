@@ -13,17 +13,23 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@pinecone-database/pinecone": "^4.1.0",
     "axios": "^1.7.9",
+    "bull": "^4.16.5",
     "cheerio": "^1.0.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "eslint": "^9.20.0",
     "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "faiss-node": "^0.5.1",
     "fs": "^0.0.1-security",
     "http-status-codes": "^2.3.0",
+    "ioredis": "^5.5.0",
     "mongoose": "^8.10.0",
-    "openai": "^4.83.0"
+    "openai": "^4.83.0",
+    "socket.io": "^4.8.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.8",
