@@ -62,6 +62,7 @@ npm start
 - **Deployment:** AWS EC2
 - **Queue:** Bull
 - **Load test:** K6
+- **Scrapping:** Cheerio
 
 ---
 
