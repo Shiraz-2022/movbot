@@ -1,4 +1,4 @@
-# 🔥 AI Movie Character Chatbot - Internship Ladder Challenge 🚀
+# 🔥 AI Movie Character Chatbot
 
 ## 📌 Project Overview
 
