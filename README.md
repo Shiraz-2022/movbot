@@ -60,6 +60,8 @@ npm start
 - **Caching & Scaling:** Redis
 - **WebSockets:** Socket.io
 - **Deployment:** AWS EC2
+- **Queue:** Bull
+- **Load test:** K6
 
 ---
 
