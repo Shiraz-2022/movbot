@@ -14,7 +14,7 @@
 **Endpoint:**
 
 ```http
-POST /chat
+POST /api/chat
 ```
 
 **Request Body:**
@@ -100,7 +100,7 @@ GET {{base_url}}/api/chat/1
 
 - **WebSocket URL:**
   ```ws
-  ws://ec2-13-200-15-25.ap-south-1.compute.amazonaws.com
+  http://ec2-13-200-15-25.ap-south-1.compute.amazonaws.com/
   ```
 
 ### 📌 **Events & Message Format**
@@ -150,7 +150,7 @@ GET {{base_url}}/api/chat/1
 1. Open **Postman** and select **New WebSocket Request**.
 2. Enter the WebSocket URL:
    ```
-   ws://ec2-13-200-15-25.ap-south-1.compute.amazonaws.com
+   http://ec2-13-200-15-25.ap-south-1.compute.amazonaws.com/
    ```
 3. Click **Connect**.
 
