@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Replace with your Redis cloud details
-
 export const redisConfig = {
   host: process.env.REDIS_HOST,
   port: Number(process.env.REDIS_PORT),

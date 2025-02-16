@@ -11,8 +11,6 @@ const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  // console.error(err.stack);
-
   const status = err.status || StatusCodes.INTERNAL_SERVER_ERROR;
   const message = err.message || "Internal Server Error";
 
@@ -22,13 +20,11 @@ const errorHandler = (
 const setupGlobalErrorHandlers = () => {
   process.on("uncaughtException", (err) => {
     console.error("Uncaught Exception:", err);
-    // Perform necessary cleanup and exit
     process.exit(1);
   });
 
   process.on("unhandledRejection", (reason, promise) => {
     console.error("Unhandled Rejection at:", promise, "reason:", reason);
-    // Perform necessary cleanup
   });
 };
 

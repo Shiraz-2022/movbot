@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import chatQueue from "@/queues/chatQueue.queue"; // Import the Bull queue
+import chatQueue from "@/queues/chatQueue.queue";
+import User from "@/models/user.model";
 
 class OpenAIController {
   chatWithBot = async (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +19,6 @@ class OpenAIController {
         character,
       });
 
-      // Wait for the job to finish and get the result
       job
         .finished()
         .then((response) => {
@@ -32,6 +32,29 @@ class OpenAIController {
         });
     } catch (error) {
       console.error("Error adding job to the queue:", error);
+      next(error);
+    }
+  };
+
+  getChats = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userId } = req.params;
+
+      if (!userId) {
+        res.error(StatusCodes.NOT_FOUND, "User ID is required");
+      }
+
+      const user = await User.findOne({ userId }).select("chats");
+
+      if (!user) {
+        res.error(StatusCodes.NOT_FOUND, "User not found");
+      }
+
+      res.success(StatusCodes.OK, "Chats retrieved successfully", {
+        chats: user.chats,
+      });
+    } catch (error) {
+      console.error("Error retrieving chats:", error);
       next(error);
     }
   };

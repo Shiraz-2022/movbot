@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "a6245a27-7c68-4d0f-837c-1a02b99f1bef",
+		"name": "movbot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28873388"
+	},
+	"item": [
+		{
+			"name": "chat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"character\":\"MARK\",\r\n    \"userMessage\":\"You're going to introduce me right?\",\r\n    \"movieName\":\"The social network\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/api/chat",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"chat"
+					]
+				},
+				"description": "This is the REST API version of getting a response from OpenAI.  \nIt uses the same logic as WebSocket to get the response, but it doesn’t store any chat data in MongoDB.  \nSince I have scraped only one movie script, only the movie _The Social Network_ is available. However, you can try any character from that movie. You can find the available characters below."
+			},
+			"response": []
+		},
+		{
+			"name": "userChat",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/chat/2",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"chat",
+						"2"
+					]
+				},
+				"description": "This api is to get chat history of a particular user\n\nReplace id in params to change user"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://ec2-13-200-15-25.ap-south-1.compute.amazonaws.com",
+			"type": "string"
+		}
+	]
+}

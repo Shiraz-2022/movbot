@@ -2,7 +2,7 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import connectMongoDB from "@/configs/mongodb.config";
 import { MongoClient } from "mongodb";
-import OpenAIService from "@/services/openai.services";
+import OpenAIService from "@/services/chat.services";
 import pc from "@/configs/pinecone.config";
 
 const index = pc.Index("movie-scripts");

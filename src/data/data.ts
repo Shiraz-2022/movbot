@@ -1,23 +1,4 @@
-import http from "k6/http";
-import { check } from "k6";
-import { randomItem } from "https://jslib.k6.io/k6-utils/1.2.0/index.js";
-
-// Define test options
-export const options = {
-  scenarios: {
-    moderate_load_test: {
-      executor: "constant-arrival-rate",
-      rate: 50, // 50 requests per second
-      timeUnit: "1s",
-      duration: "1m",
-      preAllocatedVUs: 500,
-      maxVUs: 1000, // Scale up to 1000 users
-    },
-  },
-};
-
-// 100 different random messages
-const messages = [
+export const messages = [
   "Let's start a startup?",
   "How do I become successful?",
   "Tell me about Facebook",
@@ -120,24 +101,3 @@ const messages = [
   "What’s the best way to get customers?",
   "How do I make my startup stand out?",
 ];
-
-// Define API URL
-const url = "http://localhost:3000/api/chat";
-
-export default function () {
-  const payload = JSON.stringify({
-    character: "MARK",
-    userMessage: randomItem(messages),
-    movieName: "The Social Network",
-  });
-
-  const params = {
-    headers: { "Content-Type": "application/json" },
-  };
-
-  const res = http.post(url, payload, params);
-
-  check(res, {
-    "is status 200": (r) => r.status === 200,
-  });
-}

@@ -1,14 +1,15 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { Server } from "socket.io";
 import { createServer } from "http";
 
-import openaiRoutes from "@/routes/openai.route";
+import chatRoutes from "@/routes/chat.route";
 import { errorHandler } from "@/middlewares/errorHandler.middleware";
 import routeHandler from "./middlewares/routeHandler.middleware";
 import connectMongoDB from "@/configs/mongodb.config";
 import limiter from "./middlewares/rateLimitter.middleware";
 import handleChatSocket from "@/sockets/chat.socket";
+import { StatusCodes } from "http-status-codes";
 
 const app = express();
 dotenv.config();
@@ -24,11 +25,14 @@ app.use(routeHandler);
 app.use(limiter);
 
 //routes
-app.use("/api/openai", openaiRoutes);
+app.use("/api/chat", chatRoutes);
+
+app.get("/", (req: Request, res: Response) => {
+  res.success(StatusCodes.OK, "Welcome to the place where magic happens");
+});
 
 app.use(errorHandler);
 
-// app.listen(3000, () => console.log("Server is running on port 3000"));
 server.listen(3000, () => {
   console.log("Server running on port 3000");
 });
