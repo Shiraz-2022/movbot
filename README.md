@@ -72,20 +72,6 @@ npm start
 - Dialogue retrieval is **prioritized** over AI-generated responses.
 - **Script source:** [The Social Network](https://imsdb.com/scripts/Social-Network,-The.html)
 
----
-
-## 🔥 **Ladder Challenge Implementation**
-
-| Level | Task                                | Status  |
-| ----- | ----------------------------------- | ------- |
-| 1️⃣    | Basic API Chatbot                   | ✅ Done |
-| 2️⃣    | Store & Retrieve Movie Script Data  | ✅ Done |
-| 3️⃣    | Implement RAG with Vector Search    | ✅ Done |
-| 4️⃣    | Scale System to Handle High Traffic | ✅ Done |
-| 5️⃣    | Optimize for Latency & Deploy       | ✅ Done |
-| 🎁    | Bonus: WebSockets                   | ✅ Done |
-
----
 
 ## 🔗 **Additional Resources**
 
